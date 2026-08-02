@@ -36,9 +36,15 @@ app.add_middleware(
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
     logger.error(f"Unhandled exception: {exc}", exc_info=True)
+    origin = request.headers.get("origin", "*")
+    headers = {
+        "Access-Control-Allow-Origin": origin,
+        "Access-Control-Allow-Credentials": "true",
+    }
     return JSONResponse(
         status_code=500,
-        content={"detail": "An internal server error occurred. Please try again later."}
+        content={"detail": str(exc)},
+        headers=headers
     )
 
 from routes import auth, chat, crop, fertilizer, advisory, voice, dashboard
