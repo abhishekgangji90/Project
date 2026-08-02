@@ -47,7 +47,7 @@ cp frontend/.env.example frontend/.env
 ```
 
 Configure backend API URL:
-- `VITE_API_URL`: `http://localhost:8000`
+- `VITE_API_URL`: `https://project-yi5t.onrender.com`
 
 ---
 
